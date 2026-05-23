@@ -24,11 +24,13 @@ const STYLES = `
 }
 @keyframes doorOpen {
   0% { transform: perspective(800px) rotateY(0deg); }
-  100% { transform: perspective(800px) rotateY(-75deg); }
+  60% { transform: perspective(800px) rotateY(-70deg); }
+  100% { transform: perspective(800px) rotateY(-85deg); }
 }
 @keyframes welcomeFade {
   0% { opacity: 1; }
-  100% { opacity: 0; transform: scale(1.1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.05); }
 }
 `;
 
@@ -39,7 +41,7 @@ export default function WelcomeScreen({ onEnter, onViewCollection }) {
   const handleEnter = () => {
     setEntering(true);
     playWelcomeChime();
-    setTimeout(() => onEnter(), 800);
+    setTimeout(() => onEnter(), 1800);
   };
 
   return (
@@ -49,7 +51,7 @@ export default function WelcomeScreen({ onEnter, onViewCollection }) {
       fontFamily: font,
       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
       overflow: "hidden", position: "relative",
-      animation: entering ? "welcomeFade 0.8s ease forwards" : undefined,
+      animation: entering ? "welcomeFade 1.8s ease forwards" : undefined,
     }}>
       <style>{STYLES}</style>
 
@@ -107,7 +109,7 @@ export default function WelcomeScreen({ onEnter, onViewCollection }) {
             borderRadius: "110px 110px 4px 4px",
             border: "none",
             cursor: "pointer",
-            animation: entering ? "doorOpen 0.8s ease forwards" : "doorGlow 2s ease-in-out infinite",
+            animation: entering ? "doorOpen 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards" : "doorGlow 2s ease-in-out infinite",
             transformOrigin: "left center",
             display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center",

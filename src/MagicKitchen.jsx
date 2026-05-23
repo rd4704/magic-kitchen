@@ -89,7 +89,7 @@ export default function MagicKitchen({ onRecipeComplete, onHome, onViewCollectio
 
   const [selected,    setSelected]    = useState([]);
   const [phase,       setPhase]       = useState("picking");
-  const [customerIdx, setCustomerIdx] = useState(0);
+  const [customerIdx, setCustomerIdx] = useState(() => Math.floor(Math.random() * CUSTOMERS.length));
   const [score,       setScore]       = useState(0);
   const [crafted,     setCrafted]     = useState(null);
   const [showHint,    setShowHint]    = useState(false);
