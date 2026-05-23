@@ -79,7 +79,7 @@ function Bowl({ phase, crafted, bowlItems }) {
   );
 }
 
-export default function MagicKitchen() {
+export default function MagicKitchen({ onRecipeComplete, onHome, onViewCollection }) {
   useEffect(() => {
     const el = document.createElement("style");
     el.textContent = STYLES;
@@ -127,7 +127,8 @@ export default function MagicKitchen() {
         setTimeout(() => {
           setPhase("picking"); setSelected([]); setCrafted(null);
           setShowHint(false); setCustomerIdx(i => i + 1);
-        }, 2600);
+          if (onRecipeComplete) onRecipeComplete(item.name);
+        }, 2000);
       } else {
         setPhase("wrongItem");
         setTimeout(() => { setPhase("picking"); setSelected([]); setCrafted(null); }, 2000);
@@ -166,6 +167,23 @@ export default function MagicKitchen() {
       padding:"16px",
       display:"flex", flexDirection:"column", alignItems:"center",
     }}>
+      {/* NAV BAR */}
+      <div style={{
+        width:"100%", maxWidth:680, display:"flex",
+        justifyContent:"space-between", marginBottom:8,
+      }}>
+        <button onClick={onHome} style={{
+          background:"rgba(196,75,138,0.1)", border:"2px solid #FFB3D1",
+          borderRadius:14, padding:"6px 14px", cursor:"pointer",
+          fontWeight:800, color:"#C44B8A", fontSize:13, fontFamily:font,
+        }}>🏠 Home</button>
+        <button onClick={onViewCollection} style={{
+          background:"rgba(155,89,182,0.1)", border:"2px solid #D2B4DE",
+          borderRadius:14, padding:"6px 14px", cursor:"pointer",
+          fontWeight:800, color:"#9B59B6", fontSize:13, fontFamily:font,
+        }}>💎 Crystals</button>
+      </div>
+
       {/* HEADER */}
       <div style={{textAlign:"center", marginBottom:14}}>
         <div style={{fontSize:28, fontWeight:900, color:"#C44B8A", letterSpacing:-0.5}}>
